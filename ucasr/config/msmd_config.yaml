@@ -1,0 +1,68 @@
+# paths
+# todo: simplify to data and source roots
+local_msmd_root: '/home/luis/data/prepared_msmd'
+local_umc_root: '/home/luis/data/prepared_umc_alignments'
+local_exp_root: '/home/luis/dev/ucasr/experiments'
+local_split_root: '/home/luis/dev/ucasr/ucasr/splits'
+
+remote_msmd_root: '/share/cp/datasets/prepared_msmd'
+remote_umc_root: '/share/cp/datasets/prepared_umc_alignments'
+remote_exp_root: '/share/home/luis/dev/ucasr/experiments'
+remote_split_root: '/share/home/luis/dev/ucasr/ucasr/splits'
+
+# general parameters
+snippet_len: {'sc': 2.1, 'mc': 4.2, 'lc': 8.4} # small, medium and large contexts (42, 84, 128)
+spec_bins: 92
+sheet_context: 200 # 100 after resizing
+staff_height: 160 # 80 after resizing
+fps: 20
+sr: 22050
+aug: full_aug
+n_epochs: 1000
+n_workers: 10
+n_train: 32768 # {16384, 32768, 65536}
+n_valid: 2048
+n_test: 10000
+n_refine: 25000
+
+# training parameters
+seed: 123
+init_patience: 30
+ref_patience: 10
+refinement_rounds: 5
+batch_size: 128 # {128, 256, 512}
+lr: 0.0004
+lr_factor: 0.5
+weight_decay: 0.00001
+loss_margin: 0.6
+mlp_hidden_size: 512
+emb_dim: 32
+
+# augmentation settings
+aug_configs: {
+full_aug: {'system_translation': 5,
+           'sheet_scaling': [0.95, 1.05],
+           'onset_translation': 1,
+           'synths': ['acoustic_piano_imis_1', 'ElectricPiano', 'YamahaGrandPiano'],
+           'tempo_range': [0.90, 1.10]},
+no_aug: {'system_translation': 0,
+         'sheet_scaling': [1.00, 1.00],
+         'onset_translation': 0,
+         'synths': ['ElectricPiano'],
+         'tempo_range': [1.00, 1.00]},
+sheet_aug: {'system_translation': 5,
+            'sheet_scaling': [0.95, 1.05],
+            'onset_translation': 0,
+            'synths': ['ElectricPiano'],
+            'tempo_range': [1.00, 1.00]},
+audio_aug: {'system_translation': 0,
+            'sheet_scaling': [1.00, 1.00],
+            'onset_translation': 1,
+            'synths': ['acoustic_piano_imis_1', 'ElectricPiano', 'YamahaGrandPiano'],
+            'tempo_range': [0.90, 1.10]},
+test_aug: {'system_translation': 0,
+           'sheet_scaling': [1.00, 1.00],
+           'onset_translation': 0,
+           'synths': ['grand-piano-YDP-20160804'],
+           'tempo_range': [1.00, 1.00]}
+}

@@ -1,0 +1,71 @@
+# paths
+# todo: simplify to data and source roots
+local_scores_root: '/home/luis/data/score_db_unrolled'
+local_maestro_root: '/home/luis/data/maestro-v3.0.0_resampled_22k'
+local_exp_root: '/home/luis/dev/ucasr/experiments'
+local_split_root: '/home/luis/dev/ucasr/ucasr/splits'
+
+remote_scores_root: '/share/cp/datasets/score_db_unrolled'
+remote_maestro_root: '/share/cp/datasets/maestro-v3.0.0_resampled_22k'
+remote_exp_root: '/share/home/luis/dev/ucasr/experiments'
+remote_split_root: '/share/home/luis/dev/ucasr/ucasr/splits'
+
+# general parameters
+snippet_len: {'sc': 2.1, 'mc': 4.2, 'lc': 8.4} # small, medium and large contexts (42, 84, 128)
+spec_bins: 92
+sheet_context: 200 # 100 after resizing
+staff_height: 160 # 80 after resizing
+hop: 0.2 # hop (in percentage) between consecutive snippets
+fps: 20
+fft_frame_size: 2048
+sr: 22050
+n_epochs: 300
+n_workers: 10
+n_train: 64 # {16384, 32768, 65536}
+n_valid: 64
+n_test: 10000
+
+# training parameters
+seed: 123
+patience: 15
+batch_size: 32 # {128, 256, 384, 512}
+lr: 0.001
+lr_factor: 0.5
+weight_decay: 0.00001
+loss_margin: 0.6
+mlp_hidden_size: 512
+emb_dim: 32
+
+# score augmentation parameters
+xshift_overlap: 0.80
+sheet_scaling: [0.90, 1.10]
+
+# audio augmentation parameters
+tshift_overlap: 0.7
+tstretch_range: [0.5, 1.8]
+tmask_max: 0.2
+fmask_max: 0.2
+
+# score data augmentation probabilities
+p_xshift: 0.65 #0.8
+p_yshift: 0.65 #0.8
+p_scale: 0.45 #0.5
+p_rotate: 0.35 #0.4
+p_2dnoise: 0.25 #0.4
+p_blur: 0.25 #0.4
+p_perlin: 0.2 #0.4
+p_et_small: 0.2 #0.4
+p_et_large: 0.2 #0.4
+
+# audio data augmentation probabilities
+p_tshift: 0.5
+p_tmask: 0.5
+p_fmask: 0.35
+p_tstretch: 0.4
+p_polarity: 0.5
+p_noise: 0.4
+p_gain: 0.5
+p_pitch: 0
+p_eq: 0.3
+p_rir_cpu: 0
+p_rir_gpu: 0

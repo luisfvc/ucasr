@@ -1,0 +1,50 @@
+# paths
+# todo: simplify to data and source roots
+local_scores_root: '/home/luis/data/score_db_unrolled'
+local_exp_root: '/home/luis/dev/ucasr/experiments'
+local_split_root: '/home/luis/dev/ucasr/ucasr/splits'
+
+remote_scores_root: '/share/cp/datasets/score_db_unrolled'
+remote_exp_root: '/share/home/luis/dev/ucasr/experiments'
+remote_split_root: '/share/home/luis/dev/ucasr/ucasr/splits'
+
+# general parameters
+snippet_len: {'sc': 2.1, 'mc': 4.2, 'lc': 8.4} # small, medium and large contexts (42, 84, 128)
+spec_bins: 92
+sheet_context: 200 # 100 after resizing
+staff_height: 160 # 80 after resizing
+hop: 0.2 # hop (in percentage) between consecutive snippets
+fps: 20
+fft_frame_size: 2048
+sr: 22050
+n_epochs: 180
+n_workers: 10
+n_train: 32768 # {16384, 32768, 65536}
+n_valid: 4096
+n_test: 10000
+
+# training parameters
+seed: 123
+patience: 10
+batch_size: 256 # {128, 256, 384, 512}
+lr: 0.0005
+lr_factor: 0.5
+weight_decay: 0.00001
+loss_margin: 0.5
+mlp_hidden_size: 512
+emb_dim: 32
+
+# augmentation parameters
+xshift_overlap: 0.80
+sheet_scaling: [0.90, 1.10]
+
+# data augmentation probabilities
+p_xshift: 0.65
+p_yshift: 0.65
+p_scale: 0.45
+p_rotate: 0.35
+p_2dnoise: 0.25
+p_blur: 0.25
+p_perlin: 0.2
+p_et_small: 0.2
+p_et_large: 0.2
